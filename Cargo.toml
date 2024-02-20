@@ -1,0 +1,29 @@
+[package]
+name = "mxl-base"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4"
+backtrace = "0.3"
+anyhow = "1"
+const_format = "0.2"
+fern = { version = "0.6" }
+directories = "5"
+chrono = { version = "0.4" }
+fs4 = "0.7"
+zip = "0.6"
+walkdir = "2"
+tempfile = { version = "3", optional = true }
+trash = "3"
+
+# Internationalization:
+i18n-embed-fl = { version = "0.8" }
+once_cell = { version = "1" }
+rust-embed = { version = "8", features = ["debug-embed"] }
+i18n-embed = { version = "0.14", features = ["fluent-system"] }
+
+[features]
+with_test = ["dep:tempfile"]
