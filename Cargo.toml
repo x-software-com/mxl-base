@@ -23,7 +23,10 @@ trash = "3"
 i18n-embed-fl = { version = "0.8" }
 once_cell = { version = "1" }
 rust-embed = { version = "8", features = ["debug-embed"] }
-i18n-embed = { version = "0.14", features = ["fluent-system"] }
+i18n-embed = { version = "0.14", features = [
+    "fluent-system",
+    "desktop-requester",
+] }
 
 [features]
 with_test = ["dep:tempfile"]
