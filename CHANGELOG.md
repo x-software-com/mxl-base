@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.1.1](https://github.com/x-software-com/mxl-base/compare/v0.1.0..v0.1.1) - 2024-02-22
+#### Build system
+- update Cargo.toml - ([b2e9adf](https://github.com/x-software-com/mxl-base/commit/b2e9adfbfe5b1c7d6eb089a31d9bc745e0b03a5d)) - acpiccolo
+
+- - -
+
 ## [v0.1.0](https://github.com/x-software-com/mxl-base/compare/4a110e7c74dd889e51439c69507517bcf2df08da..v0.1.0) - 2024-02-20
 #### Miscellaneous Chores
 - Initial commit - ([5892bb0](https://github.com/x-software-com/mxl-base/commit/5892bb00b1cd548c0350238dc4b7c1253071e090)) - acpiccolo
