@@ -1,4 +1,4 @@
-use crate::fl;
+use crate::localization::helper::fl;
 use anyhow::{Context, Result};
 use fs4::FileExt;
 use once_cell::sync::OnceCell;

@@ -1,4 +1,4 @@
-use crate::{fl, proc_dir};
+use crate::{localization::helper::fl, proc_dir};
 use anyhow::{Context, Result};
 use log::*;
 use once_cell::sync::{Lazy, OnceCell};

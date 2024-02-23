@@ -19,8 +19,8 @@ pub(crate) static LANGUAGE_LOADER: Lazy<FluentLanguageLoader> = Lazy::new(|| {
     loader
 });
 
-#[macro_export]
-macro_rules! fl {
+pub(crate) mod helper {
+    macro_rules! fl {
     ($message_id:literal) => {{
         i18n_embed_fl::fl!($crate::localization::LANGUAGE_LOADER, $message_id)
     }};
@@ -28,6 +28,8 @@ macro_rules! fl {
     ($message_id:literal, $($args:expr),*) => {{
         i18n_embed_fl::fl!($crate::localization::LANGUAGE_LOADER, $message_id, $($args), *)
     }};
+}
+    pub(crate) use fl;
 }
 
 // Get the `Localizer` to be used for localizing this library.
