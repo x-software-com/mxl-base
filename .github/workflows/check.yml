@@ -108,8 +108,6 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           save-if: ${{ github.ref == 'refs/heads/main' }}
-      - name: cargo install cargo-hack
-        uses: taiki-e/install-action@cargo-hack
       - name: cargo install just
         uses: taiki-e/install-action@just
       - name: cargo hack
