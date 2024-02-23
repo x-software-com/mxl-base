@@ -23,6 +23,12 @@ def setup_cocogitto():
     subprocess.run(['cog', 'install-hook', '--overwrite', 'commit-msg'], check = True)
 
 
+def install_just():
+    """Install 'just' as a basic 'make' replacement to configure, build, package and run projects"""
+    print("Install just...")
+    subprocess.run(['cargo', 'install', 'just'], check = True)
+
+
 def install_typos():
     """Install typos to check the repository for common typos"""
     print("Install typos...")
@@ -38,6 +44,7 @@ def setup_tools(setup_for_ci):
         subprocess.run(['git', 'config', '--global', '--add', 'safe.directory', os.getcwd()], check = True)
 
     install_typos()
+    install_just()
 
     install_cocogitto()
     if not setup_for_ci:

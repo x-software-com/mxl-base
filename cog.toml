@@ -3,8 +3,9 @@ ignore_merge_commits = true
 tag_prefix = "v"
 branch_whitelist = ["main"]
 pre_bump_hooks = [
-  "cargo test",
-  "cargo clippy",
+  "just test",
+  "just clippy",
+  "just hack",
   "cargo fmt --all",
   "cargo install cargo-edit",
   "cargo set-version {{version}}",
