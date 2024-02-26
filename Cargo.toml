@@ -16,7 +16,7 @@ const_format = "0.2"
 fern = { version = "0.6" }
 directories = "5"
 chrono = { version = "0.4" }
-fs4 = "0.7"
+fs4 = "0.8"
 zip = "0.6"
 walkdir = "2"
 tempfile = { version = "3", optional = true }
