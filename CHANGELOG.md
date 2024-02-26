@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.0](https://github.com/x-software-com/mxl-base/compare/v0.1.1..v0.2.0) - 2024-02-26
+#### Build system
+- add justfile, install just and make setup.py executable - ([42010c9](https://github.com/x-software-com/mxl-base/commit/42010c9598d6d2ecaef396cf5e4b5d92104b1f6c)) - marcbull
+#### Continuous Integration
+- do not install cargo-hack in extra step - ([01568d9](https://github.com/x-software-com/mxl-base/commit/01568d93265aa65a717f28d47befaf992e29ce9f)) - marcbull
+- use just in hack job - ([2e9cedb](https://github.com/x-software-com/mxl-base/commit/2e9cedbf0831eeae9d78781f095b5053dcab6def)) - marcbull
+- remove rust installation in typo job - ([e24cd65](https://github.com/x-software-com/mxl-base/commit/e24cd6551a78c9ed10784a62eac0e59a9a38b50a)) - marcbull
+#### Features
+- add third party licenses module - ([e6e2016](https://github.com/x-software-com/mxl-base/commit/e6e201600adb4ed26499996bb69eefd1b3eed519)) - marcbull
+#### Refactoring
+- make localization macro private - ([0e37a3e](https://github.com/x-software-com/mxl-base/commit/0e37a3eab39fffc671d9ee8e2566c3e9e3e8c982)) - acpiccolo
+
+- - -
+
 ## [v0.1.1](https://github.com/x-software-com/mxl-base/compare/v0.1.0..v0.1.1) - 2024-02-22
 #### Build system
 - update Cargo.toml - ([b2e9adf](https://github.com/x-software-com/mxl-base/commit/b2e9adfbfe5b1c7d6eb089a31d9bc745e0b03a5d)) - acpiccolo
