@@ -21,6 +21,8 @@ zip = "0.6"
 walkdir = "2"
 tempfile = { version = "3", optional = true }
 trash = "3"
+mithra = { git = "https://github.com/x-software-com/mithra.git", tag = "v0.1.0", optional = true }
+
 
 # Internationalization:
 i18n-embed-fl = { version = "0.8" }
@@ -32,4 +34,5 @@ i18n-embed = { version = "0.14", features = [
 ] }
 
 [features]
+third_party_licenses = ["dep:mithra"]
 with_test = ["dep:tempfile"]
