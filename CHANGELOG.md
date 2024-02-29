@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.1](https://github.com/x-software-com/mxl-base/compare/v0.2.0..v0.2.1) - 2024-02-29
+#### Bug Fixes
+- moved some code to a different component - ([b87d04e](https://github.com/x-software-com/mxl-base/commit/b87d04ec4341e044624fcea71b36db056daebe11)) - acpiccolo
+#### Build system
+- **(deps)** update fs4 requirement from 0.7 to 0.8 - ([3bd73db](https://github.com/x-software-com/mxl-base/commit/3bd73dbbf3b70856e0b8c7b60ad098ccc648d9ef)) - dependabot[bot]
+#### Miscellaneous Chores
+- remove third party licenses functionality - ([e74b8e5](https://github.com/x-software-com/mxl-base/commit/e74b8e5bfd614667f26a6d4d9f67dbf965f2a28f)) - marcbull
+
+- - -
+
 ## [v0.2.0](https://github.com/x-software-com/mxl-base/compare/v0.1.1..v0.2.0) - 2024-02-26
 #### Build system
 - add justfile, install just and make setup.py executable - ([42010c9](https://github.com/x-software-com/mxl-base/commit/42010c9598d6d2ecaef396cf5e4b5d92104b1f6c)) - marcbull
