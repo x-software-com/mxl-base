@@ -16,11 +16,6 @@ const_format = "0.2"
 fern = { version = "0.6" }
 directories = "5"
 chrono = { version = "0.4" }
-fs4 = "0.8"
-zip = "0.6"
-walkdir = "2"
-tempfile = { version = "3", optional = true }
-trash = "3"
 
 
 # Internationalization:
@@ -31,6 +26,3 @@ i18n-embed = { version = "0.14", features = [
     "fluent-system",
     "desktop-requester",
 ] }
-
-[features]
-with_test = ["dep:tempfile"]

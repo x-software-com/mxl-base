@@ -1,10 +1,12 @@
-use crate::{localization::helper::fl, proc_dir};
+use crate::localization::helper::fl;
 use anyhow::{Context, Result};
 use log::*;
 use once_cell::sync::{Lazy, OnceCell};
-use std::ops::Deref;
-use std::panic;
-use std::path::PathBuf;
+use std::{
+    ops::Deref,
+    panic,
+    path::{Path, PathBuf},
+};
 
 const KEEP_NUMBER_OF_FILES: usize = 20;
 const DEFAULT_LEVEL: log::LevelFilter = log::LevelFilter::Trace;
@@ -90,7 +92,7 @@ impl Builder {
         })
     }
 
-    fn build_with_panic_on_failure(&mut self) {
+    fn build_with_panic_on_failure(&mut self, log_dir: &Path) {
         // NOTE!!!
         // Every error MUST be a panic here else the user will not be able to see the error!
         let mut logger = self
@@ -101,14 +103,13 @@ impl Builder {
             .format(|out, message, record| {
                 out.finish(format_args!("{} [{}] {}", record.level(), record.target(), message))
             });
-        let data_dir = proc_dir::proc_dir();
         let log_file = CURRENT_LOG_FILE_HOLDER
-            .get_or_init(|| data_dir.join(format!("{}.{}", super::about::about().binary_name, LOG_FILE_SUFFIX)));
+            .get_or_init(|| log_dir.join(format!("{}.{}", super::about::about().binary_name, LOG_FILE_SUFFIX)));
 
-        std::fs::create_dir_all(data_dir).unwrap_or_else(|error| {
+        std::fs::create_dir_all(log_dir).unwrap_or_else(|error| {
             panic!(
                 "Cannot create logging directory '{}': {:?}",
-                data_dir.to_string_lossy(),
+                log_dir.to_string_lossy(),
                 error
             )
         });
@@ -184,8 +185,8 @@ impl Builder {
         Ok(())
     }
 
-    pub fn build(mut self) -> Result<()> {
-        self.build_with_panic_on_failure();
+    pub fn build(mut self, log_dir: &Path) -> Result<()> {
+        self.build_with_panic_on_failure(log_dir);
         let about = super::about::about();
 
         if !self.without_generic_log_dir {

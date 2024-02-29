@@ -11,24 +11,8 @@ pub fn init(
     crate::localization::init();
 }
 
-static PROJECT_DIR: OnceCell<directories::ProjectDirs> = OnceCell::new();
-
-#[cfg(feature = "with_test")]
-pub fn init_test() {
-    use once_cell::sync::Lazy;
-    use tempfile::TempDir;
-
-    static TMP_DIR: Lazy<TempDir> = Lazy::new(|| TempDir::new().expect("Failed create tmp directory"));
-    let path = TMP_DIR.path();
-
-    PROJECT_DIR
-        .set(directories::ProjectDirs::from_path(path.to_path_buf()).expect("No directories?"))
-        .expect("Already initialized");
-
-    crate::proc_dir::set_proc_dir(path.to_path_buf());
-}
-
 pub fn project_dirs() -> &'static directories::ProjectDirs {
+    static PROJECT_DIR: OnceCell<directories::ProjectDirs> = OnceCell::new();
     PROJECT_DIR.get_or_init(|| {
         let about = super::about::about();
         if let Some(dir) = directories::ProjectDirs::from(about.qualifier, about.organization, about.app_name) {
