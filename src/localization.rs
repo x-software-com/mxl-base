@@ -15,17 +15,19 @@ struct Localizations;
 pub static LANGUAGE_LOADER: OnceCell<FluentLanguageLoader> = OnceCell::new();
 
 pub(crate) fn init() {
-    let loader = fluent_language_loader!();
-    loader
-        .load_fallback_language(&Localizations)
-        .expect("Error while loading fallback language");
+    LANGUAGE_LOADER.get_or_init(|| {
+        let loader = fluent_language_loader!();
+        loader
+            .load_fallback_language(&Localizations)
+            .expect("Error while loading fallback language");
 
-    let localizer = DefaultLocalizer::new(&loader, &Localizations);
-    let requested_languages = DesktopLanguageRequester::requested_languages();
-    if let Err(error) = localizer.select(&requested_languages) {
-        log::error!("Error while loading language: {error}");
-    }
-    LANGUAGE_LOADER.set(loader).expect("Localization already initialized");
+        let localizer = DefaultLocalizer::new(&loader, &Localizations);
+        let requested_languages = DesktopLanguageRequester::requested_languages();
+        if let Err(error) = localizer.select(&requested_languages) {
+            log::error!("Error while loading language: {error}");
+        }
+        loader
+    });
 }
 
 pub(crate) fn language_loader() -> &'static FluentLanguageLoader {
