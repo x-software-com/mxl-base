@@ -3,7 +3,6 @@ use anyhow::{Context, Result};
 use log::*;
 use once_cell::sync::{Lazy, OnceCell};
 use std::{
-    ops::Deref,
     panic,
     path::{Path, PathBuf},
 };
@@ -204,26 +203,40 @@ impl Builder {
             println!("{}", fl!("log-written-to", file_name = log_file.to_string_lossy()));
         }
 
-        //let hook = panic::take_hook();
-        panic::set_hook(Box::new(move |panic_info| {
-            let (filename, line, column) = panic_info
-                .location()
-                .map(|loc| (loc.file(), loc.line(), loc.column()))
-                .unwrap_or(("<unknown>", 0, 0));
-            let cause = panic_info
-                .payload()
-                .downcast_ref::<String>()
-                .map(String::deref)
-                .or_else(|| panic_info.payload().downcast_ref::<&str>().copied());
-            let cause = cause.unwrap_or("<unknown cause>");
+        let log_dir_clone = log_dir.to_owned();
+        panic::set_hook(Box::new(move |info| {
+            let backtrace = backtrace::Backtrace::new();
+            let thread = std::thread::current();
+            let thread_name = thread.name().unwrap_or("<unnamed>");
+            let cause = match info.payload().downcast_ref::<&'static str>() {
+                Some(s) => *s,
+                None => match info.payload().downcast_ref::<String>() {
+                    Some(s) => &**s,
+                    None => "Box<Any>",
+                },
+            };
 
-            error!(
-                "Thread '{thread_name}' panicked at {file_name}:{line}:{column}: {cause}",
-                thread_name = std::thread::current().name().map_or("<unknown>", |name| name),
-                file_name = filename,
-            );
-            debug!("Panicked stack backtrace: {:?}", backtrace::Backtrace::new());
-            //hook(panic_info);
+            let dump = match info.location() {
+                Some(location) => {
+                    format!(
+                        "Thread '{thread_name}' panicked at '{cause}': {file_name}:{line}:{column}\n{backtrace:?}",
+                        file_name = location.file(),
+                        line = location.line(),
+                        column = location.column()
+                    )
+                }
+                None => format!("Thread '{thread_name}' panicked at '{cause}'\n{backtrace:?}"),
+            };
+            std::eprint!("{dump}");
+            let file_name = format!("{}.panic", humantime::format_rfc3339(std::time::SystemTime::now()));
+            let panic_file = log_dir_clone.join(file_name);
+            if let Err(err) = std::fs::write(&panic_file, dump) {
+                std::eprint!(
+                    "Cannot write panic into file '{}': {:?}",
+                    panic_file.to_string_lossy(),
+                    err
+                );
+            }
         }));
 
         info!("{} {}", about.app_name, about.version);
