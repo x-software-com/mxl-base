@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.2](https://github.com/x-software-com/mxl-base/compare/v0.2.1..v0.2.2) - 2024-03-07
+#### Bug Fixes
+- replace logging when panicking to prevent possible deadlocks - ([2717844](https://github.com/x-software-com/mxl-base/commit/27178442f335c47fc2a974fa134d105149b81b2a)) - acpiccolo
+#### Refactoring
+- changed localization init() - ([4cbe065](https://github.com/x-software-com/mxl-base/commit/4cbe06577dc91f3ac449c4a17f20956a4acccb2e)) - acpiccolo
+- removed unused translations - ([99e9d71](https://github.com/x-software-com/mxl-base/commit/99e9d71ebd8805b497c8e944fc4a6a55a9341739)) - acpiccolo
+
+- - -
+
 ## [v0.2.1](https://github.com/x-software-com/mxl-base/compare/v0.2.0..v0.2.1) - 2024-02-29
 #### Bug Fixes
 - moved some code to a different component - ([b87d04e](https://github.com/x-software-com/mxl-base/commit/b87d04ec4341e044624fcea71b36db056daebe11)) - acpiccolo
