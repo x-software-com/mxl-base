@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.3](https://github.com/x-software-com/mxl-base/compare/v0.2.2..v0.2.3) - 2024-03-11
+#### Bug Fixes
+- removed panic hook - ([dece613](https://github.com/x-software-com/mxl-base/commit/dece6133fcb5fa0a368fa7e05ae7e461d611b188)) - acpiccolo
+#### Refactoring
+- cleanup - ([63b169a](https://github.com/x-software-com/mxl-base/commit/63b169a0a5fef0a4cc27524e85a1d3baa0fa26af)) - acpiccolo
+- change initialization - ([0731e64](https://github.com/x-software-com/mxl-base/commit/0731e64ce40083e3fa3fbbb4be10c0895860791f)) - acpiccolo
+
+- - -
+
 ## [v0.2.2](https://github.com/x-software-com/mxl-base/compare/v0.2.1..v0.2.2) - 2024-03-07
 #### Bug Fixes
 - replace logging when panicking to prevent possible deadlocks - ([2717844](https://github.com/x-software-com/mxl-base/commit/27178442f335c47fc2a974fa134d105149b81b2a)) - acpiccolo
