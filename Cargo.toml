@@ -10,13 +10,11 @@ edition = "2021"
 
 [dependencies]
 log = "0.4"
-backtrace = "0.3"
 anyhow = "1"
 const_format = "0.2"
 fern = { version = "0.6" }
 directories = "5"
 chrono = { version = "0.4" }
-humantime = "2"
 
 # Internationalization:
 i18n-embed-fl = { version = "0.8" }

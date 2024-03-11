@@ -2,10 +2,7 @@ use crate::localization::helper::fl;
 use anyhow::{Context, Result};
 use log::*;
 use once_cell::sync::{Lazy, OnceCell};
-use std::{
-    panic,
-    path::{Path, PathBuf},
-};
+use std::path::{Path, PathBuf};
 
 const KEEP_NUMBER_OF_FILES: usize = 20;
 const DEFAULT_LEVEL: log::LevelFilter = log::LevelFilter::Trace;
@@ -198,42 +195,6 @@ impl Builder {
         if !self.without_stderr {
             println!("{}", fl!("log-written-to", file_name = log_file.to_string_lossy()));
         }
-
-        let log_dir_clone = log_dir.to_owned();
-        panic::set_hook(Box::new(move |info| {
-            let backtrace = backtrace::Backtrace::new();
-            let thread = std::thread::current();
-            let thread_name = thread.name().unwrap_or("<unnamed>");
-            let cause = match info.payload().downcast_ref::<&'static str>() {
-                Some(s) => *s,
-                None => match info.payload().downcast_ref::<String>() {
-                    Some(s) => &**s,
-                    None => "Box<Any>",
-                },
-            };
-
-            let dump = match info.location() {
-                Some(location) => {
-                    format!(
-                        "Thread '{thread_name}' panicked at '{cause}': {file_name}:{line}:{column}\n{backtrace:?}",
-                        file_name = location.file(),
-                        line = location.line(),
-                        column = location.column()
-                    )
-                }
-                None => format!("Thread '{thread_name}' panicked at '{cause}'\n{backtrace:?}"),
-            };
-            std::eprint!("{dump}");
-            let file_name = format!("{}.panic", humantime::format_rfc3339(std::time::SystemTime::now()));
-            let panic_file = log_dir_clone.join(file_name);
-            if let Err(err) = std::fs::write(&panic_file, dump) {
-                std::eprint!(
-                    "Cannot write panic into file '{}': {:?}",
-                    panic_file.to_string_lossy(),
-                    err
-                );
-            }
-        }));
 
         info!("{} {}", about.app_name, about.version);
         info!("Log is written to '{}'", log_file.to_string_lossy());
