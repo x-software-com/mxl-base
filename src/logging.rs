@@ -9,9 +9,9 @@ use std::{
 
 const KEEP_NUMBER_OF_FILES: usize = 20;
 const DEFAULT_LEVEL: log::LevelFilter = log::LevelFilter::Trace;
-const LOG_FILE_SUFFIX: &str = "log";
+const LOG_FILE_EXTENSION: &str = "log";
 const LOG_DIR_GENERIC: &str = "log";
-const LOG_FILE_FMT: &str = const_format::formatcp!("%Y-%m-%d_%H_%M_%S.{}", LOG_FILE_SUFFIX);
+const LOG_FILE_FMT: &str = const_format::formatcp!("%Y-%m-%d_%H_%M_%S.{}", LOG_FILE_EXTENSION);
 
 #[cfg(debug_assertions)] // Set debug level for console in debug builds
 const CONSOLE_LEVEL: log::LevelFilter = log::LevelFilter::Trace;
@@ -103,7 +103,7 @@ impl Builder {
                 out.finish(format_args!("{} [{}] {}", record.level(), record.target(), message))
             });
         let log_file = CURRENT_LOG_FILE_HOLDER
-            .get_or_init(|| log_dir.join(format!("{}.{}", super::about::about().binary_name, LOG_FILE_SUFFIX)));
+            .get_or_init(|| log_dir.join(format!("{}.{}", super::about::about().binary_name, LOG_FILE_EXTENSION)));
 
         std::fs::create_dir_all(log_dir).unwrap_or_else(|error| {
             panic!(
@@ -138,31 +138,27 @@ impl Builder {
     }
 
     fn cleanup_logfiles(binary_name: &str, path: &std::path::Path) -> Result<()> {
-        // Read all files in the given path:
-        let files = std::fs::read_dir(path)
-            .with_context(|| format!("Cannot list log directory '{}'", path.to_string_lossy()))?;
-
         // Collect all matching logfiles in the directory:
-        let mut log_files: Vec<_> = vec![];
-        for file in files {
-            match file {
-                Ok(entry) => {
-                    let path = entry.path();
-                    if let Some(filename) = path.file_name() {
-                        if let Some(filename) = filename.to_str() {
-                            if path.is_file()
-                                && !path.is_symlink()
-                                && filename.starts_with(binary_name)
-                                && filename.ends_with(const_format::formatcp!(".{}", LOG_FILE_SUFFIX))
-                            {
-                                log_files.push(path);
-                            }
+        let log_file_extension = std::ffi::OsString::from(LOG_FILE_EXTENSION);
+        let mut log_files = std::fs::read_dir(path)
+            .with_context(|| format!("Cannot list log directory '{}'", path.to_string_lossy()))?
+            .filter_map(|file| {
+                match file {
+                    Ok(entry) => {
+                        let path = entry.path();
+                        if path.is_file()
+                            && !path.is_symlink()
+                            && path.starts_with(binary_name)
+                            && path.extension() == Some(log_file_extension.as_os_str())
+                        {
+                            return Some(path);
                         }
                     }
+                    Err(error) => warn!("Cannot read log file: {}", error.to_string()),
                 }
-                Err(error) => warn!("Cannot read log file: {}", error.to_string()),
-            }
-        }
+                None
+            })
+            .collect::<Vec<_>>();
 
         // Remove all logfiles that exceed the number of files to preserve:
         if log_files.len() > KEEP_NUMBER_OF_FILES {
@@ -192,7 +188,7 @@ impl Builder {
             #[cfg(target_family = "unix")]
             {
                 let log_dir = self.generic_log_dir();
-                let symlink = log_dir.join(format!("{}.{}", about.binary_name, LOG_FILE_SUFFIX));
+                let symlink = log_dir.join(format!("{}.{}", about.binary_name, LOG_FILE_EXTENSION));
                 _ = std::fs::remove_file(&symlink);
                 let log_file = self.generig_log_file();
                 _ = std::os::unix::fs::symlink(log_file, &symlink);
