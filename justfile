@@ -1,7 +1,7 @@
 #!/usr/bin/env -S just --justfile
 
 test:
-    cargo test --no-fail-fast --workspace --locked --all-features --all-targets
+    cargo test --no-fail-fast --workspace --all-features --all-targets
 
 hack:
     cargo install cargo-hack
