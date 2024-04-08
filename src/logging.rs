@@ -196,8 +196,11 @@ impl Builder {
             // Currently not use translation. The log file name is wrapped to: <2068>log-file-name<2069>
             // Some terminals copy these possibly invisible special characters when selecting and copying,
             // so that the log file cannot be opened.
-            // println!("{}", fl!("log-written-to", file_name = log_file.to_string_lossy()));
-            println!("Log is written to '{}'", log_file.to_string_lossy());
+            if false {
+                println!("{}", fl!("log-written-to", file_name = log_file.to_string_lossy()));
+            } else {
+                println!("Log is written to '{}'", log_file.to_string_lossy());
+            }
         }
 
         info!("{} {}", about.app_name, about.version);
