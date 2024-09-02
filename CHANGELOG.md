@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.4](https://github.com/x-software-com/mxl-base/compare/e6cc51322b5dce2f6fe3e0345f848e3758ef5983..v0.2.4) - 2024-09-02
+#### Bug Fixes
+- add workaround to print the current log file name - ([5770dc3](https://github.com/x-software-com/mxl-base/commit/5770dc36341c4fce26a8d906ec7af3066aa46533)) - acpiccolo
+- add workaround to print the current log file name - ([e6cc513](https://github.com/x-software-com/mxl-base/commit/e6cc51322b5dce2f6fe3e0345f848e3758ef5983)) - acpiccolo
+#### Build system
+- **(deps)** bump crate-ci/typos from 1.18.2 to 1.20.4 - ([8cc8a7c](https://github.com/x-software-com/mxl-base/commit/8cc8a7c414f7ab5fde7a242e4c78cb6cccebe02d)) - dependabot[bot]
+- change typos exclude - ([b7d92c1](https://github.com/x-software-com/mxl-base/commit/b7d92c187bca6bc8abd5012c12972c7dd6062718)) - acpiccolo
+- removed --locked argument - ([2091604](https://github.com/x-software-com/mxl-base/commit/20916042f51cef0227b2ec4107b198defae1fba8)) - acpiccolo
+#### Miscellaneous Chores
+- update i18n-embed-fl and i18n-embed versions - ([36b7a55](https://github.com/x-software-com/mxl-base/commit/36b7a55a43a6461e7faaee1fdaba158d0d4765b8)) - acpiccolo
+
+- - -
+
 ## [v0.2.3](https://github.com/x-software-com/mxl-base/compare/v0.2.2..v0.2.3) - 2024-03-11
 #### Bug Fixes
 - removed panic hook - ([dece613](https://github.com/x-software-com/mxl-base/commit/dece6133fcb5fa0a368fa7e05ae7e461d611b188)) - acpiccolo

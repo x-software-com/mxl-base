@@ -1,6 +1,6 @@
 [package]
 name = "mxl-base"
-version = "0.2.3"
+version = "0.2.4"
 license = "MIT OR APACHE-2.0"
 repository = "https://github.com/x-software-com/mxl-base/"
 description = "This is a component of the X-Software MXL product line"
