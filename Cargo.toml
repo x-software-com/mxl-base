@@ -17,10 +17,10 @@ directories = "5"
 chrono = { version = "0.4" }
 
 # Internationalization:
-i18n-embed-fl = { version = "0.8" }
+i18n-embed-fl = { version = "0.9" }
 once_cell = { version = "1" }
 rust-embed = { version = "8", features = ["debug-embed"] }
-i18n-embed = { version = "0.14", features = [
+i18n-embed = { version = "0.15", features = [
     "fluent-system",
     "desktop-requester",
 ] }
