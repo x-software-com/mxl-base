@@ -12,7 +12,7 @@ edition = "2021"
 log = "0.4"
 anyhow = "1"
 const_format = "0.2"
-fern = { version = "0.6" }
+fern = { version = "0.7" }
 directories = "5"
 chrono = { version = "0.4" }
 
