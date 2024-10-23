@@ -2,10 +2,16 @@
 [![dependency status](https://deps.rs/repo/github/x-software-com/mxl-base/status.svg)](https://deps.rs/repo/github/x-software-com/mxl-base)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-
 # Overview
 
 This is a component of the X-Software MXL product line.
+
+## Setup
+
+```sh
+cargo install --locked just
+just setup
+```
 
 # Contributing
 
