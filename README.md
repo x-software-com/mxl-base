@@ -2,6 +2,10 @@
 [![dependency status](https://deps.rs/repo/github/x-software-com/mxl-base/status.svg)](https://deps.rs/repo/github/x-software-com/mxl-base)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
+# NOTE
+
+**This repository has been moved to [mxl-crates](https://github.com/x-software-com/mxl-crates).**
+
 # Overview
 
 This is a component of the X-Software MXL product line.
